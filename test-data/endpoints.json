@@ -1,0 +1,8 @@
+{
+    "getUsers": {
+        "url": "/api/users?page=2"
+    },
+    "getUser": {
+        "url": "/api/users/2"
+    }
+}

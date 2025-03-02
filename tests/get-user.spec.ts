@@ -1,31 +1,34 @@
 import { test, expect } from '@playwright/test';
+import { success } from '../test-data/status-codes.json';
+import { data, support } from '../test-data/user.json';
+import { getUser } from '../test-data/endpoints.json';
 
 test.describe('GET user', {
     tag: ['@api', '@get', '@getuser']
 }, () => {
-    test('verify response code',async({request})=>{
-        const response = await request.get('/api/users/2');
-        expect(response.status()).toBe(200);
+    test('verify response code', async ({ request }) => {
+        const response = await request.get(getUser.url);
+        expect(response.status()).toBe(success.ok);
     });
-    test('verify user id',async({request})=>{
-        const response = await request.get('/api/users/2');
+    test('verify user id', async ({ request }) => {
+        const response = await request.get(getUser.url);
         const resBody = await response.json();
-        expect(resBody.data.id).toBe(2);
+        expect(resBody.data.id).toBe(data.id);
     });
-    test('verify user data',async({request})=>{
-        const response = await request.get('/api/users/2');
+    test('verify user data', async ({ request }) => {
+        const response = await request.get(getUser.url);
         const resBody = await response.json();
-        expect(resBody.data.email).toEqual('janet.weaver@reqres.in');
-        expect(resBody.data.first_name).toEqual('Janet');
-        expect(resBody.data.last_name).toEqual('Weaver');
-        expect(resBody.data.avatar).toEqual('https://reqres.in/img/faces/2-image.jpg');
+        expect(resBody.data.email).toEqual(data.email);
+        expect(resBody.data.first_name).toEqual(data.first_name);
+        expect(resBody.data.last_name).toEqual(data.last_name);
+        expect(resBody.data.avatar).toEqual(data.avatar);
         console.log(resBody);
     });
-    test('verify support details',async({request})=>{
-        const response = await request.get('/api/users/2');
+    test('verify support details', async ({ request }) => {
+        const response = await request.get(getUser.url);
         const resBody = await response.json();
-        expect(resBody.support.url).toEqual('https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral');
-        expect(resBody.support.text).toEqual('Tired of writing endless social media content? Let Content Caddy generate it for you.');
+        expect(resBody.support.url).toEqual(support.url);
+        expect(resBody.support.text).toEqual(support.text);
         console.log(resBody);
-    });          
+    });
 });
