@@ -4,5 +4,8 @@
     },
     "getUser": {
         "url": "/api/users/2"
+    },
+    "createUser": {
+        "url": "/api/users"
     }
 }
