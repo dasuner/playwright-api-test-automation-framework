@@ -1,0 +1,8 @@
+/* static test data */
+
+{
+   "UserDetails":{
+      "username":"admin",
+      "password":"password"
+   }
+}
